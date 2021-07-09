@@ -36,8 +36,6 @@ def display(request):
         filters = json.dumps(language)
         book = Book.objects.filter(language__in=language)
         book1 = Book.objects.filter(genre__in=genre)
-        print(book)
-        print(book1)
         matches = book.union(book1)
         
         count = matches.count()

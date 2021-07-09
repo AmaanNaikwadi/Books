@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelf</title>
+</head>
+<body>
+    <h1>Shelf</h1>
+    {% if message %}
+        <h3>There are {{ message }} book(s) with applied filters.</h3>
+    {% endif %}
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <td>
+                <h3>Book</h3>
+            </td>
+            <td>
+                <h3>Author</h3>
+            </td>
+            <td>
+                <h3>Language</h3>
+            </td>
+            <td>
+                <h3>Genre</h3>
+            </td>
+        </tr>
+        {% for i in books %}
+        <tr>
+            <td>
+                {{ i.name }}
+            </td>
+            <td>
+                {{ i.author }}
+            </td>
+            <td>
+                {{ i.language }}
+            </td>
+            <td>
+                {{ i.genre }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form method = "POST" action = '{% url "display" %}'>
+        {% csrf_token %}
+        <h2>Filter By : </h2>
+    <h3>Language : </h3>
+    <table>
+        <tr>
+            <td>
+                <input type="checkbox" name="Language" value="English">English</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Language" value="Hindi">Hindi</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Language" value="Spanish">Spanish</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Language" value="German">German</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Language" value="Other Languages">Other Languages</input>
+            </td>
+        </tr>
+    </table>
+    <h3>Genre : </h3>
+    <table>
+        <tr>
+            <td>
+                <input type="checkbox" name="Genre" value="Comedy">Comedy</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Genre" value="Horror">Horror</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Genre" value="Drama">Drama</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Genre" value="Thriller">Thriller</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="Genre" value="Other Genres">Other Genres</input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="submit" value="Apply Filters">
+            </td>
+        </tr>
+    </table>
+    </form>
+    <br>
+    <table>
+        <tr>
+            <td>
+                <form method="GET" action='{% url "home" %}'>
+                    {% csrf_token %}
+                        <input type="submit" value="Add a book">
+                </form>
+            </td>
+        </tr>
+    </table>
+       
+
+</body>
+</html>

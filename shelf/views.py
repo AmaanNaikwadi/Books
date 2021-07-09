@@ -6,6 +6,7 @@ from shelf.models import Book
 from django.http import JsonResponse
 import re
 from django.http import HttpResponse, HttpResponseRedirect
+import json
 
 def home(request):
     if request.method == "GET":
@@ -30,11 +31,14 @@ def display(request):
     else:
         language = request.POST.getlist('Language')
         genre = request.POST.getlist('Genre')
+        for i in range (0, len(genre)):
+            language.append(genre[i])
+        filters = json.dumps(language)
         book = Book.objects.filter(language__in=language)
         book1 = Book.objects.filter(genre__in=genre)
         matches = book.union(book1)
         count = matches.count()
-        return render(request, 'shelf/display.html', {'message': count, 'books': matches})
+        return render(request, 'shelf/display.html', {'message': count, 'books': matches, 'filters': filters})
 
 
 

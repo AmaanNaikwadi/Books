@@ -76,6 +76,19 @@
                     </td>
                 </tr>
                 <tr>
+                <tr>
+                    <td>
+                        <br>
+                    </td>
+                </tr>
+                    <td>
+                        Details:
+                    </td>
+                    <td>
+                        <input type='text' id='textboxid' name='details' autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <br>
                     </td>
@@ -89,9 +102,12 @@
         </fieldset>
     </form>
     <br>
-    <form method = "GET" action='{% url "display" %}'>
-        {% csrf_token %}
-            <input type = 'submit' value='View Books'>
-    </form>
+    <a href = '{% url "display" %}'>View Books</a>
+    <!--script type="text/javascript">
+        function box() {
+            document.getElementById('textboxid').style.height="200px";
+        }
+        box();
+    </script-->
 </body>
 </html>
